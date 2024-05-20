@@ -1,25 +1,25 @@
->msa_set_4.txt 1e-07
-TP=70.0,TN=114202.0,FN=1.0,FP=1.0,Q2=0.9999824982060661,MCC=0.9859067366203473
-false negative: ['P84555']
-false positive: ['D3GGZ8']
-F1 score: 0.9859154929577465
->msa_set_3.txt 1e-07
-TP=71.0,TN=114215.0,FN=1.0,FP=0.0,Q2=0.9999912500984364,MCC=0.9930269268113067
-false negative: ['P85039']
-false positive: []
+>set_4.txt 1e-07
+TP=71.0,TN=114164.0,FN=0.0,FP=1.0,Q2=0.9999912461920936,MCC=0.9930269248693252
+false negative: []
+false positive: ['P56409']
 F1 score: 0.993006993006993
->msa_set_2.txt 1e-07
-TP=70.0,TN=114166.0,FN=1.0,FP=0.0,Q2=0.999991246268722,MCC=0.9929284250271102
-false negative: ['P56409']
+>set_3.txt 1e-07
+TP=72.0,TN=114168.0,FN=0.0,FP=1.0,Q2=0.9999912465752225,MCC=0.9931227169406055
+false negative: []
+false positive: ['P84555']
+F1 score: 0.993103448275862
+>set_2.txt 1e-07
+TP=71.0,TN=114189.0,FN=0.0,FP=0.0,Q2=1.0,MCC=1.0
+false negative: []
+false positive: []
+F1 score: 1.0
+>set_1.txt 1e-07
+TP=71.0,TN=114196.0,FN=0.0,FP=0.0,Q2=1.0,MCC=1.0
+false negative: []
+false positive: []
+F1 score: 1.0
+>set_0.txt 1e-07
+TP=70.0,TN=114175.0,FN=1.0,FP=0.0,Q2=0.999991246958318,MCC=0.9929284253698929
+false negative: ['D3GGZ8']
 false positive: []
 F1 score: 0.9929078014184397
->msa_set_1.txt 1e-07
-TP=71.0,TN=114158.0,FN=0.0,FP=0.0,Q2=1.0,MCC=1.0
-false negative: []
-false positive: []
-F1 score: 1.0
->msa_set_0.txt 1e-07
-TP=71.0,TN=114151.0,FN=0.0,FP=0.0,Q2=1.0,MCC=1.0
-false negative: []
-false positive: []
-F1 score: 1.0
