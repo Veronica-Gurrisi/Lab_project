@@ -2,17 +2,6 @@
 import sys
 import numpy as np
 
-# def get_data(predfile): 
-#     """Reading the info has to identify to each seq the e-value and the label"""
-#     preds = [] #output = list of lists
-#     with open(predfile, "r") as f:
-#         for line in f:
-#             v = line.rstrip().split() #v = [seqID, e-value, label]
-#             v[1] = float(v[1]) #e-value
-#             v[2] = int(v[2]) #label -> we use int instead of bool because is useful after for the confision matrix (we use them as indexes to access the matrix)
-#             preds.append(v)
-#     return preds
-
 def get_data(predfile): 
     """Reading the info has to identify to each seq the e-value and the label"""
     preds = [] #output = list of lists
