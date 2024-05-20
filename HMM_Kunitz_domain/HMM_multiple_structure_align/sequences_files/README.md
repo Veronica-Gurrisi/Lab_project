@@ -2,9 +2,9 @@
 
 - PDB_report.csv: This file is a custom report generated from an advanced search in the Protein Data Bank (PDB). It contains information on the 21 selected proteins that were used in the study. The columns included in this file are:
 
-    PDB ID: The unique identifier for each protein structure in the PDB.
-    Amino Acid Sequence: The sequence of amino acids for the protein.
-    Chain Identifier (Auth Asym ID): The identifier for the specific chain of the protein.
+    PDB ID: The unique identifier for each protein structure in the PDB,
+    Amino Acid Sequence: The sequence of amino acids for the protein,
+    Chain Identifier (Auth Asym ID): The identifier for the specific chain of the protein,
     Polymer Entity Entry ID: The identifier for the polymer entity within the PDB entry.
   
 - list_pdb.txt: This file is generated from the PDB_report.csv file using a series of command-line operations. It contains identifiers for the protein sequences used in the study. It is uploaded in PDBeFold to carry out the 3D structural alignment.
