@@ -19,7 +19,7 @@ def get_data(predfile):
                 print("yes")
                 print(line, c)
     return preds  
-    
+      
 #CONFUSION MATRIX (CM)
 def compute_cm(preds,th=0.5): 
     cm = np.zeros((2,2)) #matrix 2x2
@@ -31,13 +31,12 @@ def compute_cm(preds,th=0.5):
         if pred[1]<=th: p=1 #if e-value lower than the threshold the prediction is positive
         #the sign depends on what is the variable that we use to do the classification, in our case the best case is the e-value as lower as possible, so we use <=
         cm[p][pred[2]]+=1 #we identify the cell [prediction][label=reality] and we add one case
-        if p == 0 and pred[2] == 1: # false pos
+        if p == 1 and pred[2] == 0: # false pos
             fp_ids.append(pred[0]) # append IDs
-        elif p ==1 and pred[2] == 0: # false neg
+        elif p ==0 and pred[2] == 1: # false neg
             fn_ids.append(pred[0])
 
     return cm, fn_ids, fp_ids #return the confusion matrix TN, FN, FP, TP
-        
         
 #OVERALL ACCURACY        
 def get_accuracy(cm): #(TN+TP)/(TN+TP+FN+FP) = (TN+TP)/tot
@@ -50,8 +49,8 @@ def get_accuracy(cm): #(TN+TP)/(TN+TP+FN+FP) = (TN+TP)/tot
 def get_mcc(cm): #(TP*TN-FP*FN)/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
     tp = cm[1][1]
     tn = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
+    fn = cm[0][1]
+    fp = cm[1][0]
     mcc = (tp*tn-fp*fn)/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
     #at the denominator all the possible combinations between true and false
     return mcc
@@ -60,8 +59,8 @@ def get_mcc(cm): #(TP*TN-FP*FN)/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
 def get_f1(cm): # 2 * (precision * recall) / (precision + recall)
     tp = cm[1][1]
     tn = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
+    fn = cm[0][1]
+    fp = cm[1][0]
     
 
     if tp + fp == 0 or tp + fn == 0:
@@ -86,7 +85,7 @@ if __name__=="__main__":
     if len(sys.argv)<2: 
         cm_complete = compute_cm(preds)
         
-    else:
+   else:
         th = float(sys.argv[2]) #float because it is an e-value
         cm_complete = compute_cm(preds,th)
         
@@ -99,12 +98,11 @@ if __name__=="__main__":
 
     if "com" in sys.argv[1]:
         print(">" + " " + str(th))
-        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[1][0]) + "," + 'FP=' + str(cm[0][1]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
+        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[0][1]) + "," + 'FP=' + str(cm[1][0]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
     else:
         print(">" + sys.argv[1] + " " + str(th))
-        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[1][0]) + "," + 'FP=' + str(cm[0][1]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
+        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[0][1]) + "," + 'FP=' + str(cm[1][0]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
         print("false negative:", fn)
         print("false positive:", fp)
         print("F1 score:", f1)
-
 
