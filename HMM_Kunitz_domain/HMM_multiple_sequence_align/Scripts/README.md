@@ -33,6 +33,6 @@ Calculates the F1 score, which is the harmonic mean of precision and recall. Tak
 ### 6. Main Function:
 Reads the prediction file from the command-line arguments. Optionally, accepts a threshold value for prediction. Computes confusion matrix and other metrics. Prints the results including TP, TN, FP, FN, accuracy, MCC, and F1 score. Additionally, if the prediction file name contains "com", it only prints essential metrics without false positives and false negatives.
 
-### best_mcc.py: it reads a performance evaluation file, extracts Matthews Correlation Coefficient (MCC) values and their corresponding thresholds, identifies the best threshold that maximizes the MCC, and plots the MCC values against the thresholds.
+- best_mcc.py: it reads a performance evaluation file, extracts Matthews Correlation Coefficient (MCC) values and their corresponding thresholds, identifies the best threshold that maximizes the MCC, and plots the MCC values against the thresholds.
 
 - script.sh: bash script needed to modify the output file of MSA from MUSCLE in order to clean it, removing any white lines and gaps, so to use the final modified file for building the model.
