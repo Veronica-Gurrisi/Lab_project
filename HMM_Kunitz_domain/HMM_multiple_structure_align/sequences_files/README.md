@@ -9,13 +9,13 @@
   
 - list_pdb.txt: This file is generated from the PDB_report.csv file using a series of command-line operations. It contains identifiers for the protein sequences used in the study. It is uploaded in PDBeFold to carry out the 3D structural alignment.
 
-- clean_kunitz_3d.ali: This file is obtained by downloading the output for PDBeFold, manipulated for better visualization. It represents the multiple sequence alignment derived from the multiple structure alignment.
+- clean_kunitz_3d.ali: This file is obtained by downloading the output from PDBeFold, manipulated for better visualization. It represents the multiple sequence alignment derived from the multiple structure alignment.
 
 - cut_kunitz_3d.ali: This file is used as input to make the model, generated from the previous one by excluding gaps to obtain better results.
   
-- cut_kunitz_3d.hmm: output of the HMM 
+- cut_kunitz_3d.hmm: this is the constructed HMM for the Kunitz-type protease inhibitor domain.
 
-- bpti_pos_selected.fasta: This file contains the positive set of the benchmark set. It likely includes sequences that are known to belong to a certain protein family or class.
+- bpti_pos_selected.fasta: This file contains the positive set of the benchmark set.
 
 - negatives_r1.ids: This file contains the identifiers for the negative set of the benchmark set, which consists of proteins without the domain of interest.
 
