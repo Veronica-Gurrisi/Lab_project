@@ -2,16 +2,23 @@
 import sys
 import numpy as np
 
-# def get_data(predfile): 
-#     """Reading the info has to identify to each seq the e-value and the label"""
-#     preds = [] #output = list of lists
-#     with open(predfile, "r") as f:
-#         for line in f:
-#             v = line.rstrip().split() #v = [seqID, e-value, label]
-#             v[1] = float(v[1]) #e-value
-#             v[2] = int(v[2]) #label -> we use int instead of bool because is useful after for the confision matrix (we use them as indexes to access the matrix)
-#             preds.append(v)
-#     return preds
+def get_data(predfile): 
+    """Reading the info has to identify to each seq the e-value and the label"""
+    preds = [] #output = list of lists
+    with open(predfile, "r") as f:
+        c = 0
+        for line in f:
+            c += 1
+            v = line.rstrip().split() #v = [seqID, e-value, label]
+            if len(v) >= 3:  # Ensure the line has at least three elements
+                v[0] = str(v[0])
+                v[1] = float(v[1]) #e-value
+                v[2] = int(v[2]) #label -> we use int instead of bool because is useful after for the confision matrix (we use them as indexes to access the matrix)
+                preds.append(v)
+            else:
+                print("yes")
+                print(line, c)
+    return preds  
 
 def get_data(predfile): 
     """Reading the info has to identify to each seq the e-value and the label"""
@@ -42,13 +49,12 @@ def compute_cm(preds,th=0.5):
         if pred[1]<=th: p=1 #if e-value lower than the threshold the prediction is positive
         #the sign depends on what is the variable that we use to do the classification, in our case the best case is the e-value as lower as possible, so we use <=
         cm[p][pred[2]]+=1 #we identify the cell [prediction][label=reality] and we add one case
-        if p == 0 and pred[2] == 1: # false pos
+        if p == 1 and pred[2] == 0: # false pos
             fp_ids.append(pred[0]) # append IDs
-        elif p ==1 and pred[2] == 0: # false neg
+        elif p ==0 and pred[2] == 1: # false neg
             fn_ids.append(pred[0])
 
     return cm, fn_ids, fp_ids #return the confusion matrix TN, FN, FP, TP
-        
         
 #OVERALL ACCURACY        
 def get_accuracy(cm): #(TN+TP)/(TN+TP+FN+FP) = (TN+TP)/tot
@@ -61,8 +67,8 @@ def get_accuracy(cm): #(TN+TP)/(TN+TP+FN+FP) = (TN+TP)/tot
 def get_mcc(cm): #(TP*TN-FP*FN)/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
     tp = cm[1][1]
     tn = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
+    fn = cm[0][1]
+    fp = cm[1][0]
     mcc = (tp*tn-fp*fn)/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
     #at the denominator all the possible combinations between true and false
     return mcc
@@ -71,8 +77,8 @@ def get_mcc(cm): #(TP*TN-FP*FN)/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
 def get_f1(cm): # 2 * (precision * recall) / (precision + recall)
     tp = cm[1][1]
     tn = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
+    fn = cm[0][1]
+    fp = cm[1][0]
     
 
     if tp + fp == 0 or tp + fn == 0:
@@ -88,7 +94,6 @@ def get_f1(cm): # 2 * (precision * recall) / (precision + recall)
     return f1_score
 
 
-
 if __name__=="__main__":
     predfile = sys.argv[1]
     #to do the optimization we have to compare the performance with different thresholds
@@ -97,7 +102,7 @@ if __name__=="__main__":
     if len(sys.argv)<2: 
         cm_complete = compute_cm(preds)
         
-    else:
+   else:
         th = float(sys.argv[2]) #float because it is an e-value
         cm_complete = compute_cm(preds,th)
         
@@ -110,12 +115,13 @@ if __name__=="__main__":
 
     if "com" in sys.argv[1]:
         print(">" + " " + str(th))
-        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[1][0]) + "," + 'FP=' + str(cm[0][1]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
+        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[0][1]) + "," + 'FP=' + str(cm[1][0]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
     else:
         print(">" + sys.argv[1] + " " + str(th))
-        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[1][0]) + "," + 'FP=' + str(cm[0][1]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
+        print('TP=' + str(cm[1][1]) + "," + 'TN=' + str(cm[0][0]) + "," + 'FN=' + str(cm[0][1]) + "," + 'FP=' + str(cm[1][0]) + "," + 'Q2=' + str(q2) + "," + 'MCC=' + str(mcc))
         print("false negative:", fn)
         print("false positive:", fp)
         print("F1 score:", f1)
+
 
 
