@@ -12,4 +12,4 @@
 
 - msa_com_set_*.txt: These files represent combined sets containing both positive and negative data, labeled accordingly (1 if part of the positive set, 0 if negative). They include the e-value and the ID and are used for training the model.
 
-- msa_set_*.txt: These files represent single sets with both positive and negative data used for validation. They also contain the e-value, ID, and label.
+- msa_set_*.txt: These files represent single sets with both positive and negative data used for testing. They also contain the e-value, ID, and label.
